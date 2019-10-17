@@ -62,7 +62,7 @@ window.addEventListener('DOMContentLoaded', function() {
             minutes = timer.querySelector('.minutes'),
             seconds = timer.querySelector('.seconds'),
             timeInterval = setInterval(updateClock, 1000);
-        // как с использованием for?
+        // ---как с использованием for?---
         function ifNeedZero(addZero) {
             if (addZero < 10) {
                 return '0';
@@ -97,7 +97,7 @@ window.addEventListener('DOMContentLoaded', function() {
         this.classList.add('more-spash');
         document.body.style.overflow = 'hidden';
     });
-    // как без дублирования кода?
+    // ---как без дублирования кода?---
     description.addEventListener('click', function() {
         overlay.style.display = 'block';
         this.classList.add('more-spash');
