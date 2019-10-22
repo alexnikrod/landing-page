@@ -141,9 +141,10 @@ window.addEventListener('DOMContentLoaded', function() {
                 obj[key] = value;
             });
             let json = JSON.stringify(obj);
+
             request.send(json);
-    
-            request.addEventListener('readystatechange', function() {
+
+            request.onreadystatechange = function() {
                 if (request.readyState < 4) {
                     statusMessage.innerHTML = message.loading;
                 } else if (request.readyState === 4 && request.status == 200) {
@@ -151,7 +152,7 @@ window.addEventListener('DOMContentLoaded', function() {
                 } else {
                     statusMessage.innerHTML = message.failure;
                 }
-            });
+            };
     
             for (let i = 0; i < input.length; i++) {
                 input[i].value = '';
@@ -162,5 +163,4 @@ window.addEventListener('DOMContentLoaded', function() {
     sendForm(form);
     sendForm(contact);
 
-    
 });
