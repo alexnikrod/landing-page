@@ -1,2 +1,2 @@
-# Webpack
+# Webpack + Babel
 modules
