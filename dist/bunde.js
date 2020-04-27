@@ -95,37 +95,37 @@
 
 function calc() {
   // Calc
-  var persons = document.querySelectorAll('.counter-block-input')[0],
-      restDays = document.querySelectorAll('.counter-block-input')[1],
-      place = document.getElementById('select'),
-      totalValue = document.getElementById('total'),
+  var persons = document.querySelectorAll(".counter-block-input")[0],
+      restDays = document.querySelectorAll(".counter-block-input")[1],
+      place = document.getElementById("select"),
+      totalValue = document.getElementById("total"),
       personsSum = 0,
       daysSum = 0,
       total = 0;
   totalValue.innerHTML = 0;
-  persons.addEventListener('change', function () {
+  persons.addEventListener("change", function () {
     personsSum = +this.value;
-    total = (daysSum + personsSum) * 4000;
+    total = (daysSum + personsSum) * 250;
 
-    if (restDays.value == '' || persons.value == '') {
+    if (restDays.value == "" || persons.value == "") {
       totalValue.innerHTML = 0;
     } else {
       totalValue.innerHTML = total;
     }
   }); //
 
-  restDays.addEventListener('change', function () {
+  restDays.addEventListener("change", function () {
     daysSum = +this.value;
-    total = (daysSum + personsSum) * 4000;
+    total = (daysSum + personsSum) * 250;
 
-    if (restDays.value == '' || persons.value == '') {
+    if (restDays.value == "" || persons.value == "") {
       totalValue.innerHTML = 0;
     } else {
       totalValue.innerHTML = total;
     }
   });
-  place.addEventListener('change', function () {
-    if (restDays.value == '' || persons.value == '') {
+  place.addEventListener("change", function () {
+    if (restDays.value == "" || persons.value == "") {
       totalValue.innerHTML = 0;
     } else {
       var a = total;
@@ -150,18 +150,18 @@ var _Promise = typeof Promise === 'undefined' ? __webpack_require__(/*! es6-prom
 function form() {
   // Form + JSON
   var message = {
-    loading: 'Загрузка...',
-    success: 'Спасибо! Скоро мы с вами свяжемся!',
-    failure: 'Что-то пошло не так...'
+    loading: "Loading...",
+    success: "Thank you! We will soon call you back!",
+    failure: "Something went wrong..."
   };
-  var form = document.getElementsByClassName('main-form')[0],
-      contact = document.getElementById('contact-form'),
-      input = document.getElementsByTagName('input'),
-      statusMessage = document.createElement('div');
-  statusMessage.classList.add('status');
+  var form = document.getElementsByClassName("main-form")[0],
+      contact = document.getElementById("contact-form"),
+      input = document.getElementsByTagName("input"),
+      statusMessage = document.createElement("div");
+  statusMessage.classList.add("status");
 
   function sendForm(elem) {
-    elem.addEventListener('submit', function (event) {
+    elem.addEventListener("submit", function (event) {
       event.preventDefault();
       elem.appendChild(statusMessage);
       var formData = new FormData(elem); // Promise --->
@@ -169,7 +169,7 @@ function form() {
       function postData(data) {
         return new _Promise(function (resolve, reject) {
           var request = new XMLHttpRequest();
-          request.open('POST', 'server.php');
+          request.open("POST", "server.php");
           request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
           request.onreadystatechange = function () {
@@ -189,7 +189,7 @@ function form() {
 
       function clearInput() {
         for (var i = 0; i < input.length; i++) {
-          input[i].value = '';
+          input[i].value = "";
         }
       }
 
@@ -220,30 +220,58 @@ module.exports = form;
 
 function modal() {
   // Modul
-  var more = document.querySelector('.more'),
-      overlay = document.querySelector('.overlay'),
-      close = document.querySelector('.popup-close'),
-      description = document.querySelector('.description-btn');
+  var more = document.querySelector(".more"),
+      overlay = document.querySelector(".overlay"),
+      close = document.querySelector(".popup-close"),
+      descriptionBtns = document.querySelectorAll(".description-btn");
 
   function popUp(elem) {
-    elem.addEventListener('click', function () {
-      overlay.style.display = 'block';
-      elem.classList.add('more-spash');
-      document.body.style.overflow = 'hidden';
+    elem.addEventListener("click", function () {
+      overlay.style.display = "block";
+      elem.classList.add("more-spash");
+      document.body.style.overflow = "hidden";
     });
   }
 
   popUp(more);
-  popUp(description); // ---> в функцию:
-
-  close.addEventListener('click', function () {
-    overlay.style.display = 'none';
-    close.classList.remove('more-spash');
-    document.body.style.overflow = '';
+  descriptionBtns.forEach(function (btn) {
+    popUp(btn);
+  });
+  close.addEventListener("click", function () {
+    overlay.style.display = "none";
+    close.classList.remove("more-spash");
+    document.body.style.overflow = "";
   });
 }
 
 module.exports = modal;
+
+/***/ }),
+
+/***/ "./js/parts/nav.js":
+/*!*************************!*\
+  !*** ./js/parts/nav.js ***!
+  \*************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function nav() {
+  // Nav Links
+  var links = document.querySelectorAll('.nav-link');
+  links.forEach(function (link) {
+    link.addEventListener('click', function (event) {
+      event.preventDefault();
+      var id = link.dataset.id;
+      var elmnt = document.getElementById(id);
+      console.log(id, elmnt);
+      elmnt.scrollIntoView({
+        block: 'center'
+      });
+    });
+  });
+}
+
+module.exports = nav;
 
 /***/ }),
 
@@ -257,11 +285,11 @@ module.exports = modal;
 function slider() {
   // Slider
   var slideIndex = 1,
-      slides = document.querySelectorAll('.slider-item'),
-      prev = document.querySelector('.prev'),
-      next = document.querySelector('.next'),
-      dotsWrap = document.querySelector('.slider-dots'),
-      dots = document.querySelectorAll('.dot');
+      slides = document.querySelectorAll(".slider-item"),
+      prev = document.querySelector(".prev"),
+      next = document.querySelector(".next"),
+      dotsWrap = document.querySelector(".slider-dots"),
+      dots = document.querySelectorAll(".dot");
   showSlides(slideIndex);
 
   function showSlides(n) {
@@ -274,13 +302,13 @@ function slider() {
     }
 
     slides.forEach(function (item) {
-      return item.style.display = 'none';
+      return item.style.display = "none";
     });
     dots.forEach(function (item) {
-      return item.classList.remove('dot-active');
+      return item.classList.remove("dot-active");
     });
-    slides[slideIndex - 1].style.display = 'block';
-    dots[slideIndex - 1].classList.add('dot-active');
+    slides[slideIndex - 1].style.display = "block";
+    dots[slideIndex - 1].classList.add("dot-active");
   }
 
   function plusSlides(n) {
@@ -291,15 +319,15 @@ function slider() {
     showSlides(slideIndex = n);
   }
 
-  prev.addEventListener('click', function () {
+  prev.addEventListener("click", function () {
     plusSlides(-1);
   });
-  next.addEventListener('click', function () {
+  next.addEventListener("click", function () {
     plusSlides(1);
   });
-  dotsWrap.addEventListener('click', function (event) {
+  dotsWrap.addEventListener("click", function (event) {
     for (var i = 0; i < dots.length + 1; i++) {
-      if (event.target.classList.contains('dot') && event.target == dots[i - 1]) {
+      if (event.target.classList.contains("dot") && event.target == dots[i - 1]) {
         currentSlide(i);
       }
     }
@@ -319,30 +347,30 @@ module.exports = slider;
 
 function tabs() {
   // Tabs
-  var tab = document.querySelectorAll('.info-header-tab'),
-      info = document.querySelector('.info-header'),
-      tabContent = document.querySelectorAll('.info-tabcontent');
+  var tab = document.querySelectorAll(".info-header-tab"),
+      info = document.querySelector(".info-header"),
+      tabContent = document.querySelectorAll(".info-tabcontent");
 
   function hideTabContent(a) {
     for (var i = a; i < tabContent.length; i++) {
-      tabContent[i].classList.remove('show');
-      tabContent[i].classList.add('hide');
+      tabContent[i].classList.remove("show");
+      tabContent[i].classList.add("hide");
     }
   }
 
   hideTabContent(1);
 
   function showTabContent(b) {
-    if (tabContent[b].classList.contains('hide')) {
-      tabContent[b].classList.remove('hide');
-      tabContent[b].classList.add('show');
+    if (tabContent[b].classList.contains("hide")) {
+      tabContent[b].classList.remove("hide");
+      tabContent[b].classList.add("show");
     }
   }
 
-  info.addEventListener('click', function (event) {
+  info.addEventListener("click", function (event) {
     var target = event.target;
 
-    if (target && target.classList.contains('info-header-tab')) {
+    if (target && target.classList.contains("info-header-tab")) {
       for (var i = 0; i < tab.length; i++) {
         if (target == tab[i]) {
           hideTabContent(0);
@@ -367,7 +395,7 @@ module.exports = tabs;
 
 function timer() {
   // Timer
-  var deadline = '2019-12-18';
+  var deadline = "2020-07-18";
 
   function getTimeRemaining(endtime) {
     var t = Date.parse(endtime) - Date.parse(new Date()),
@@ -376,27 +404,27 @@ function timer() {
         hours = Math.floor(t / 1000 / 60 / 60 % 24),
         days = Math.floor(t / (1000 * 60 * 60 * 24));
     return {
-      'total': t,
-      'seconds': seconds,
-      'minutes': minutes,
-      'hours': hours,
-      'days': days
+      total: t,
+      seconds: seconds,
+      minutes: minutes,
+      hours: hours,
+      days: days
     };
   }
 
   function setClock(id, endtime) {
     var timer = document.getElementById(id),
-        days = timer.querySelector('.days'),
-        hours = timer.querySelector('.hours'),
-        minutes = timer.querySelector('.minutes'),
-        seconds = timer.querySelector('.seconds'),
+        days = timer.querySelector(".days"),
+        hours = timer.querySelector(".hours"),
+        minutes = timer.querySelector(".minutes"),
+        seconds = timer.querySelector(".seconds"),
         timeInterval = setInterval(updateClock, 1000); // ---как с использованием for?---
 
     function ifNeedZero(addZero) {
       if (addZero < 10) {
-        return '0';
+        return "0";
       } else {
-        return '';
+        return "";
       }
     }
 
@@ -413,7 +441,7 @@ function timer() {
     }
   }
 
-  setClock('timer', deadline);
+  setClock("timer", deadline);
 }
 
 module.exports = timer;
@@ -432,8 +460,8 @@ __webpack_require__(/*! nodelist-foreach-polyfill */ "./node_modules/nodelist-fo
 
 __webpack_require__(/*! formdata-polyfill */ "./node_modules/formdata-polyfill/formdata.min.js");
 
-window.addEventListener('DOMContentLoaded', function () {
-  'use strict';
+window.addEventListener("DOMContentLoaded", function () {
+  "use strict";
 
   var calc = __webpack_require__(/*! ./parts/calc.js */ "./js/parts/calc.js");
 
@@ -447,12 +475,15 @@ window.addEventListener('DOMContentLoaded', function () {
 
   var timer = __webpack_require__(/*! ./parts/timer.js */ "./js/parts/timer.js");
 
+  var nav = __webpack_require__(/*! ./parts/nav.js */ "./js/parts/nav.js");
+
   calc();
   form();
   modal();
   slider();
   tabs();
   timer();
+  nav();
 });
 
 /***/ }),
