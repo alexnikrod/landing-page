@@ -1,5 +1,7 @@
-# [DEMO](/)
-# Landing Page
+# [DEMO](https://alexnikrod.github.io/landing-page/)
+# Landing Page - Yoga Travel 
  
-JS, Bootstrap
-Webpack + Babel
+- JS, CSS
+- Bootstrap
+- Webpack 
+- Babel
