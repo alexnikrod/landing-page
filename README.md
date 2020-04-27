@@ -1,2 +1,5 @@
-# Webpack + Babel
-modules
+# [DEMO](/)
+# Landing Page
+ 
+JS, Bootstrap
+Webpack + Babel
